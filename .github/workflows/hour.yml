@@ -29,12 +29,5 @@ jobs:
 
       - name: Echo Date
         run: |
-          while true
-          do
-            if [ $(date +%M%S) = "0000" ]
-            then
-              echo $(date)
-              break
-            fi
-            sleep 1
-          done
+          pip install pytz
+          python clock.py
