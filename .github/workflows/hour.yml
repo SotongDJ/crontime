@@ -28,6 +28,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Echo Date
+        env:
+          TOKEN: ${{ secrets.token }}
         run: |
           pip install pytz
-          python clock.py
+          python clock.py "$TOKEN"
