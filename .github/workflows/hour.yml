@@ -29,7 +29,8 @@ jobs:
 
       - name: Echo Date
         env:
+          HOST: ${{ secrets.host }}
           TOKEN: ${{ secrets.token }}
         run: |
-          pip install pytz
-          python clock.py "$TOKEN"
+          pip install pytz Mastodon.py
+          python clock.py "$HOST" "$TOKEN"
