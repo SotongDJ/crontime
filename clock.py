@@ -43,6 +43,7 @@ class chatbot:
                 woof_msg = woof_msg + small_msg * (4 + run_hour_int)
         random.seed(now_time.strftime("%Y-%m-%d"))
         magic_int = random.choice(range(8,23))
+        print(F"Magic number: {magic_int}")
         if hour_int == 0:
             self.host.status_post(woof_msg+F"\nMagic number: {magic_int}", visibility="public", spoiler_text="Magic are finding their way today! Woof!")
         elif hour_int == magic_int:
