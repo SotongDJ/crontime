@@ -1,2 +1,2 @@
 # crontime
-testing crontab
+Time report chatbot for Mastodon
