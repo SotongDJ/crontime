@@ -17,7 +17,8 @@ class chatbot:
     def push(self,now_time):
         time_str = now_time.strftime("%Y-%m-%d %H:%M:%S %z")
         hour_int = int(now_time.strftime("%H"))
-        print(time_str)
+        run_hour_int = 0
+        print(f"Bot.push({time_str})")
 
         small_msg = "woof~"
         large_msg = "WOOF!!!!!! WOOF!!!!!!\n"
@@ -41,7 +42,8 @@ class chatbot:
                 woof_msg = woof_msg + small_msg * 4 + "\n"
             else:
                 woof_msg = woof_msg + small_msg * (4 + run_hour_int)
-        random.seed(now_time.strftime("%Y-%m-%d"))
+        now_str = now_time.strftime("%Y-%m-%d")
+        random.seed(now_str)
         magic_int = random.choice(range(8,23))
         print(F"Magic number: {magic_int}")
         if hour_int == 0:
