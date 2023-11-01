@@ -14,7 +14,7 @@ class chatbot:
             api_base_url = host
         )
         print("Run: __init__()")
-    def push(self,now_time):
+    def push(self,now_time,prefix=""):
         time_str = now_time.strftime("%Y-%m-%d %H:%M:%S %z")
         hour_int = int(now_time.strftime("%H"))
         run_hour_int = hour_int
@@ -47,26 +47,29 @@ class chatbot:
         magic_int = random.choice(range(8,23))
         print(F"Magic number: {magic_int}")
         if hour_int == 0:
-            self.host.status_post(woof_msg+F"\nMagic number: {magic_int}", visibility="public", spoiler_text="Magic are finding their way today! Woof!")
+            self.host.status_post(prefix+woof_msg+F"\nMagic number: {magic_int}", visibility="public", spoiler_text="Magic are finding their way today! Woof!")
         elif hour_int == magic_int:
-            self.host.status_post(woof_msg, visibility="public", spoiler_text=emoji_msg)
+            self.host.status_post(prefix+woof_msg, visibility="public", spoiler_text=emoji_msg)
         else:
-            self.host.status_post(woof_msg, visibility="public")
+            self.host.status_post(prefix+woof_msg, visibility="public")
 
 Bot = chatbot(host=args.host,token=args.token)
 run = True
 while run:
     now_time = datetime.datetime.now(pytz.timezone('Asia/Singapore'))
     time_str = now_time.strftime("%Y-%m-%d %H:%M:%S %z")
-    min_str = now_time.strftime("%M")
-    sec_int = int(now_time.strftime("%S"))
-    if min_str == "00":
+    min_int = int(now_time.strftime("%M"))
+    if min_int == 0:
         print(time_str)
-        Bot.push(now_time=now_time)
+        Bot.push(now_time)
         run = False
-    elif sec_int < 50 and sec_int > 10:
+    elif min_int < 50:
+        print(time_str)
+        Bot.push(now_time,prefix="> DELAYED <\n")
+        run = False
+    elif min_int >= 50 and min_int < 58:
         print(f"[{time_str}] Countdown... +60s")
         time.sleep(60)
     else:
         print(f"[{time_str}] Countdown... +10s")
-        time.sleep(10)
+        time.sleep(5)
