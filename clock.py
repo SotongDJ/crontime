@@ -68,8 +68,8 @@ while run:
         Bot.push(now_time,prefix="> DELAYED <\n")
         run = False
     elif min_int >= 50 and min_int < 58:
-        print(f"[{time_str}] Countdown... +60s")
+        print(f"[{time_str}] Countdown 60s")
         time.sleep(60)
     else:
-        print(f"[{time_str}] Countdown... +10s")
+        print(f"[{time_str}] Countdown 5s")
         time.sleep(5)
