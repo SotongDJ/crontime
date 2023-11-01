@@ -17,7 +17,7 @@ class chatbot:
     def push(self,now_time):
         time_str = now_time.strftime("%Y-%m-%d %H:%M:%S %z")
         hour_int = int(now_time.strftime("%H"))
-        run_hour_int = 0
+        run_hour_int = hour_int
         print(f"Bot.push({time_str})")
 
         small_msg = "woof~"
