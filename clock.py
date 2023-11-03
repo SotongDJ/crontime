@@ -22,14 +22,6 @@ class chatbot:
 
         small_msg = "woof~"
         large_msg = "WOOF!!!!!! WOOF!!!!!!\n"
-        ear_list = ["V{}V","▼{}▼","U{}U","◖{}◗","(V{})","(▼{})","(U{})","(◖{})","({}V)","({}▼)","({}U)","({}◗)"]
-        face_list = [" ● ᴥ ● "," ・ ᴥ ・ "," ´ ꓃ ` "," ^ ｪ ^ "," ⚆ ᴥ ⚆ ","´• ﻌ •`"," ❍ᴥ❍ "]
-
-        emoji_msg = ""
-        random.seed(now_str)
-        ear_str = random.choice(ear_list)
-        face_str = random.choice(face_list)
-        emoji_msg = ear_str.format(face_str)
         if hour_int == 0:
             woof_msg = F"[12AM midnight]\n"
         elif hour_int == 12:
@@ -49,6 +41,14 @@ class chatbot:
         now_str = now_time.strftime("%Y-%m-%d")
         random.seed(now_str)
         magic_int = random.choice(range(8,23))
+
+        ear_list = ["V{}V","▼{}▼","U{}U","◖{}◗","(V{})","(▼{})","(U{})","(◖{})","({}V)","({}▼)","({}U)","({}◗)"]
+        face_list = [" ● ᴥ ● "," ・ ᴥ ・ "," ´ ꓃ ` "," ^ ｪ ^ "," ⚆ ᴥ ⚆ ","´• ﻌ •`"," ❍ᴥ❍ "]
+        random.seed(now_str)
+        ear_str = random.choice(ear_list)
+        face_str = random.choice(face_list)
+        emoji_msg = ear_str.format(face_str)
+
         print(F"Hour number: {hour_int}")
         print(F"Magic number: {magic_int}")
         print(F"Woof msg: {woof_msg}")
