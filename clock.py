@@ -42,8 +42,35 @@ class chatbot:
         random.seed(now_str)
         magic_int = random.choice(range(8,23))
 
-        ear_list = ["V{}V","▼{}▼","U{}U","◖{}◗","(V{})","(▼{})","(U{})","(◖{})","({}V)","({}▼)","({}U)","({}◗)"]
-        face_list = [" ● ᴥ ● "," ・ ᴥ ・ "," ´ ꓃ ` "," ^ ｪ ^ "," ⚆ ᴥ ⚆ ","´• ﻌ •`"," ❍ᴥ❍ "]
+        ear_list = [
+            "V{}V",
+            "▼{}▼",
+            "U{}U",
+            "◖{}◗",
+            "(◖{})",
+            "(V{})",
+            "(▼{})",
+            "(U{})",
+            "({}V)",
+            "({}▼)",
+            "({}U)",
+            "({}◗)"
+        ]
+        face_list = [
+            " ʘ ᴥ ʘ ",
+            " ● ᴥ ● ",
+            " ・ᴥ・ ",
+            " ´ ꓃ ` ",
+            " ^ ｪ ^ ",
+            "´• ﻌ •`",
+            " ^ ᴥ ^ ",
+            " - ᴥ - ",
+            " ⁰ ᴥ ⁰ ",
+            " ❍ ᴥ ❍ ",
+            " ⚆ ᴥ ⚆ ",
+            " ◕ ᴥ ◕ ",
+            " ・ ᴥ ・ ",
+            ]
         random.seed(now_str)
         ear_str = random.choice(ear_list)
         face_str = random.choice(face_list)
