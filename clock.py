@@ -86,6 +86,7 @@ class chatbot:
             self.host.status_post(prefix+woof_msg, visibility="public", spoiler_text=emoji_msg)
         else:
             self.host.status_post(prefix+woof_msg, visibility="public")
+        time.sleep(1)
         self.host.status_post(f"status: \ntime: {now_str} ", visibility="direct")
 
 Bot = chatbot(host=args.host,token=args.token)
