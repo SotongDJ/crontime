@@ -2,6 +2,9 @@
 import argparse, datetime, random, time
 import pytz
 from mastodon import Mastodon
+from gpiozero import CPUTemperature
+
+cpu = CPUTemperature()
 parser = argparse.ArgumentParser(description="run Crontime")
 parser.add_argument("host", help="Host", type=str)
 parser.add_argument("token", help="Token", type=str)
@@ -87,7 +90,7 @@ class chatbot:
         else:
             self.host.status_post(prefix+woof_msg, visibility="public")
         time.sleep(1)
-        self.host.status_post(f"status: \ntime: {now_str} ", visibility="direct")
+        self.host.status_post(F"CPU Temp: {cpu.temperature} \ntime: {now_str} ", visibility="direct")
 
 Bot = chatbot(host=args.host,token=args.token)
 run = True
