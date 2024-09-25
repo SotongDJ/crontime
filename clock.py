@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 import argparse, datetime, random, time
 import pytz
+import json
 from mastodon import Mastodon
-from gpiozero import CPUTemperature
 
 cpu = CPUTemperature()
 parser = argparse.ArgumentParser(description="run Crontime")
-parser.add_argument("host", help="Host", type=str)
-parser.add_argument("token", help="Token", type=str)
+parser.add_argument("env", help="Environment config", type=str)
 args = parser.parse_args()
 
 class chatbot:
-    def __init__(self,host="",token=""):
+    def __init__(self,env_path):
+        env_json = json.load(open(env_path))
         self.host = Mastodon(
-            access_token = token,
-            api_base_url = host
+            access_token = env_json["host"]["token"],
+            api_base_url = env_json["host"]["domain"]
         )
         print("Run: __init__()")
     def push(self,now_time,prefix=""):
@@ -41,8 +41,8 @@ class chatbot:
                 woof_msg = woof_msg + small_msg * 4 + "\n"
             else:
                 woof_msg = woof_msg + small_msg * (4 + run_hour_int)
-        now_str = now_time.strftime("%Y-%m-%d")
-        random.seed(now_str)
+        the_day_str = now_time.strftime("%Y-%m-%d")
+        random.seed(the_day_str)
         magic_int = random.choice(range(8,23))
 
         ear_list = [
@@ -74,7 +74,7 @@ class chatbot:
             " ◕ ᴥ ◕ ",
             " ・ ᴥ ・ ",
             ]
-        random.seed(now_str)
+        random.seed(the_day_str)
         ear_str = random.choice(ear_list)
         face_str = random.choice(face_list)
         emoji_msg = ear_str.format(face_str)
@@ -90,9 +90,8 @@ class chatbot:
         else:
             self.host.status_post(prefix+woof_msg, visibility="public")
         time.sleep(1)
-        self.host.status_post(F"CPU Temp: {cpu.temperature} \ntime: {now_str} ", visibility="direct")
 
-Bot = chatbot(host=args.host,token=args.token)
+Bot = chatbot(args.env)
 run = True
 while run:
     now_time = datetime.datetime.now(pytz.timezone('Asia/Singapore'))
@@ -104,7 +103,7 @@ while run:
         run = False
     elif min_int < 50:
         print(time_str)
-        Bot.push(now_time,prefix="> DELAYED <\n")
+        Bot.push(now_time,prefix="> #DELAYED <\n")
         run = False
     elif min_int >= 50 and min_int < 58:
         print(f"[{time_str}] Countdown 60s")
