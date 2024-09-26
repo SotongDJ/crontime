@@ -4,7 +4,6 @@ import pytz
 import json
 from mastodon import Mastodon
 
-cpu = CPUTemperature()
 parser = argparse.ArgumentParser(description="run Crontime")
 parser.add_argument("env", help="Environment config", type=str)
 args = parser.parse_args()
